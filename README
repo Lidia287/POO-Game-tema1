@@ -1,0 +1,63 @@
+README
+
+
+The program contains a total of 16 CLASSES , them being :
+
+- Hero : class from which i derived Rogue, Wizard, Pyromancer , Knight
+- Abilities : class from which i derived AbilitiesRogue, AbilitiesWizard,
+ AbilitiesPyromancer, AbilitiesKnight
+- Main : the class that contains the main method 
+- FileReader, FileWriter, IWriter(interface), IReader(interface), FileSystem
+ from fileio used for working with files
+
+DOUBLE DISPATCH : 
+
+-I tried to implement the double dispatch in a way that each character can 
+accept each opponent's abilities , therefore in a Knight type there are 5 
+accept methods overloaded with the following signature :
+
+ public final void accept(final Abilities a) {
+a.interactWith(this);
+}
+
+ while in the AbilitiesKnight there are methods such as this : 
+
+ void interactWith(final Hero e) {
+
+}
+
+EXPLANATION:
+
+~ Hero :
+
+ contains the important fields that are the same for all characters 
+such as : x, y, level, alive(checks if the character is still alive - boolean),
+ contorRound, contorMove(used for DoT purposes), abilityToMOve(boolean),xp, 
+totalDamage(which will then be substracted from the hp), 
+damagePerRound(for DoT purposes), damageWizard (in each AbilitiesCharacter on
+ a fight with the wizard , the damage given to it will be stored here 
+, to be used later on the deflect ability)
+The constructor of the Hero class has 2 parameters : x and y
+-each derived class , for example Knight will instantiate the necessary abilites
+ and specific parameters such as hp, type
+- the change method makes the levelUp changes to the parameters
+
+~ Abilities : 
+ 
+example : 
+-AbilitiesKnight : the constructor initiates the necessary parameters , using 
+magic numbers (the parameters will change with the level so they can not be directly
+ final ), in the calculus i used floats , so that in the end i apply the Math.round()
+
+~ Main :
+
+ the static variables are used to read the content of the file 
+-the array of Heros named personaje will keep the characters and change their parameters
+ , i iterate through the rounds , check the position of characters and where i find two
+ characters alive at the same spot , the battle begins 
+- one important condition is that the wizard is the second to attack so that the 
+damageWizard parameter can be calculated(for deflect), 
+- after each hero has accepted 
+the opponent's abilities , if one is dead and the other alive , the xp will be 
+modified and the level  in some cases
+- in the end , each character status will be displayed
